@@ -43,7 +43,7 @@ const app = Vue.createApp({
           console.log(res)
           this.loadingStatus.loadingItem = ''
           this.product = res.data.product
-          this.$refs.userProductModal.openModal()
+          // this.$refs.userProductModal.openModal()
         })
         .catch(err => console.log(err))
     },
@@ -59,7 +59,9 @@ const app = Vue.createApp({
         .then(res => {
           this.loadingStatus.loadingItem = ''
           console.log(res)
+          this.$refs.userProductModal.hideModal()
           this.getCart()
+          alert('已新增至購物車')
         })
         .catch(err => console.log(err))
     },
@@ -110,7 +112,7 @@ const app = Vue.createApp({
     },
     isPhone (value) {
       const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+      return phoneNumber.test(value) ? true : '需為09開頭且為10碼數字'
     },
     onSubmit () {
       console.log(this.form)
@@ -120,15 +122,8 @@ const app = Vue.createApp({
           if(res.data.success){
             console.log(res)
             this.getCart()
-            this.form = {
-              user: {
-                name: '',
-                email: '',
-                tel: '',
-                address: ''
-              },
-              message: ''
-            }
+            this.$refs.form.resetForm()
+            alert('已送出訂單')
           }
         })
         .catch(err => console.log(err))

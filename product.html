@@ -63,8 +63,8 @@
           </tbody>
         </table>
         <!-- 購物車列表 -->
-        <div class="text-end">
-          <button class="btn btn-outline-danger" type="button" @click="deleteAll">清空購物車</button>
+        <div class="text-end" v-if="cart.carts">
+          <button class="btn btn-outline-danger" type="button" @click="deleteAll" v-if="cart.carts.length !== 0">清空購物車</button>
         </div>
         <table class="table align-middle">
           <thead>
@@ -160,8 +160,8 @@
             <label for="message" class="form-label">留言</label>
             <textarea id="message" class="form-control" cols="30" rows="10"></textarea>
           </div>
-          <div class="text-end">
-            <button type="submit" class="btn btn-danger">送出訂單</button>
+          <div class="text-end" v-if="cart.carts">
+            <button type="submit" class="btn btn-danger" :disabled="cart.carts.length === 0">送出訂單</button>
           </div>
         </v-form>
       </div>
